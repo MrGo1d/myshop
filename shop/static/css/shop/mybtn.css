@@ -1,0 +1,39 @@
+#position {
+    margin-left:15%;
+    position: relative;
+}
+
+a.button, input[type="submit"] {
+    color:#fff;
+    background:#2D4B5E;
+    border-radius:4px;
+    padding:10px 20px;
+    font-size:14px;
+    border:0;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+    text-transform: uppercase;
+
+}
+
+.button:hover {
+    color: #2D4B5E;
+    background: #fff;
+    tansition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    -moz-transition: all .3s linear;
+}
+
+a.button.light {
+    color:#666;
+    background:#ededed;
+}
+
+.text-left {
+    text-align:left;
+}
+
+.text-right {
+    text-align:right;
+}

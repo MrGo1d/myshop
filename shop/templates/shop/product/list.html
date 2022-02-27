@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Главная{% endif %}
+{% endblock %}
+
+{% block content %}
+<div id="sidebar">
+    <h3>Категории</h3>
+    <ul>
+    <li {% if not category %} class="selected"{% endif %}>
+        <a href="{% url "shop:product_list" %}">Все</a>
+    </li>
+    {% for c in categories %}
+        <li {% if category.slug == c.slug %} class="selected" {% endif %}>
+            <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+<link href="{% static "css/shop/list.css" %}" rel="stylesheet">
+<div id="main" class="product-list">
+    <h1>{% if category %}{{ category.name }}{% else %}Оборудование{% endif %}</h1>
+    {% for product in products %}
+    <div class="item">
+        <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a class="text-prod-list" href="{{ product.get_absolute_url }}"><b>{{ product.name }}</b> {{product.product_name}}</a>
+        {{ product.price }} BYN
+    </div>
+    {% endfor %}
+</div>
+{% include "shop/pagination.html" with page=products %}
+{% endblock %}

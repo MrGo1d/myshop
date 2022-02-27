@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block content %}
+<link href="{% static "css/shop/list.css" %}" rel="stylesheet">
+<div id="main" class="product-list">
+    {% for product in products %}
+    <div class="item">
+        <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a class="text-prod-list" href="{{ product.get_absolute_url }}"><b>{{ product.name }}</b> {{product.product_name}}</a>
+        {{ product.price }} BYN
+    </div>
+    {% empty %}
+    <h3 style="color: #2D4B5E" >По вашему запросу ничего не найдено:(</h3>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}

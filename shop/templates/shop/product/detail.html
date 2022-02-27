@@ -1,0 +1,27 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Оборудование{% endif %}
+{% endblock %}
+{% block content %}
+    <div class="product-detail">
+        <img src="{% if product.image %}{{ product.image }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        <h3>{{ product.name }}</h3>
+        <h3>{{ product.product_name }} </h3>
+        <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+        <p class="price">Цена: {{ product.price }} BYN</p>
+        {% if request.user.is_authenticated %}
+            <p class="stock">Наличие: <b>{% if product.stock == 'Р' %}<b style="color:red">Товар зарезервирован! Наличие уточняйте у продавца.</b>{% elif product.stock %}{{ product.stock }}{% else %}<b style="color:red">Товар зарезервирован! Наличие уточняйте у продавца.</b>{% endif %}</b></p>
+            <p class="stock"><b>{% if product.stock and product.stock != 'Р' %} * - менее 5; ** - менее 10; *** - более 10 {% endif %}</b></p>
+            {% if product.stock and product.stock != 'Р' %}
+            <form action="{% url "cart:cart_add" product.id %}" method="post">
+                {{ cart_product_form }}
+                {% csrf_token %}
+            <input type="submit" value="Добавить в корзину">
+            </form>
+            {% endif %}
+        {% endif %}
+        <h3><b>Спецификация:</b></h3>
+        <h4>{% if product.description %}{{ product.description | linebreaks }}{% else %} Описание отсутсвует :( {% endif %}</h4>
+    </div>
+{% endblock %}

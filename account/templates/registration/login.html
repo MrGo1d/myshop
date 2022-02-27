@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% block title %}Войти{% endblock %}
+{% block content %}
+<h1>Авторизация</h1>
+  {% if form.errors %}
+    <p>Имя пользователя или пароль не совпадают. Повторите попытку.</p>
+  {% else %}
+    <p>Введите логин и пароль</p>
+  {% endif %}
+  <div class="login-form">
+  <form action="{% url 'login' %}" method="post">
+    <p><a href="{% url "password_reset" %}">Забыли пароль?</a></p>
+    <p><a href="{% url "register" %}">Зарегистрироваться</a></p>
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <p><input type="submit" value="Войти"></p>
+  </form>
+  </div>
+  <div class="social">
+    <ul>
+    <p>Войти с помощью:</p>
+      <li class="google">
+        <a href="{% url "social:begin" "google-oauth2" %}">
+          Google
+        </a>
+      </li>
+      <li class="twitter">
+        <a href="{% url "social:begin" "twitter" %}">Twitter</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}

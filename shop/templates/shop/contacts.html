@@ -1,0 +1,18 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Контакты{% endblock %}
+{% block content %}
+    <h1>Контакты</h1>
+    <div id="about">
+        <p>"Horns and hooves" LLC</p>
+        <p>200000, г. Минск, пр-т Машерова, 1</p>
+        <p>р/с №BY00XXXX000000000000000000000001 в ЗАО «Альфа-Банк»</p>
+        <p>Республика Беларусь, 220013, г. Минск, ул. Сурганова, 43-47.</p>
+        <p>Тел. факс: +375 (17) 200-00-00</p>
+        <p>e-mail: info@myshop.by</p>
+        <link href="{% static "css/shop/map.css" %}" rel="stylesheet">
+        <div id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d550.8245053647443!2d27.576496225722405!3d53.91069628212707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbcfbb632e5ad1%3A0xdf6d492d4a3241c9!2z0L_RgNC-0YHQvy4g0JzQsNGI0LXRgNC-0LLQsCAxLCDQnNC40L3RgdC6!5e1!3m2!1sru!2sby!4v1644253957786!5m2!1sru!2sby" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+{% endblock %}

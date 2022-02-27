@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}Horns&hooves{% endblock %}</title>
+    <link href="{% static "css/shop/base.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <a href="/" class="logo"><b>Horns&hooves LLC</b></a>
+    </div>
+    <span class="search">
+        <form class="s1" action="/search" method="get">
+            <input class="s2" name="q" type="text" placeholder="Поиск...">
+            <button class="b1" type="submit">Найти</button>
+        </form>
+    </span>
+    <div id="subheader">
+        <div class="cart">
+            {% if request.user.is_authenticated %}
+                {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                Ваша корзина:<br>
+                <a href="{% url "cart:cart_detail" %}">
+                    {{ total_items }} позиции{{ total_items|pluralize }},
+                    {{ cart.get_total_price }} BYN
+                </a>
+                {% else %}
+                    Ваша корзина пуста.
+                {% endif %}
+                {% endwith %}
+            {% endif %}
+        </div>
+        <span class="user">
+        {% if request.user.is_authenticated %}
+            Привет, {{ request.user.username }},<br>
+            <a href="{% url "logout" %}">Выход</a>
+            <a href="{% url "password_change" %}">| Сменить пароль</a>
+        {% else %}
+            <a href="{% url "login" %}">Войти</a>
+        {% endif %}
+      </span>
+        <link href="{% static "css/shop/mybtn.css" %}" rel="stylesheet">
+        <div id="position">
+            <a href="/" class="button">Главная</a>
+            <a href="/about" class="button" >О компании</a>
+            <a href="/contacts" class="button">Контакты</a>
+            <a href="static/price.xls" class="button">Прайс-лист</a>
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

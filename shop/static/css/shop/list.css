@@ -1,0 +1,44 @@
+#main {
+    float: left;
+    width: 96%;
+    margin-right: -220px;
+    overflow: hidden;
+    position: relative;
+    top: 30px;
+}
+
+.product-list .item {
+    width: 29%;
+    height: 300px;
+    padding: 10px 20px 30px 0;
+    float: left;
+    text-align: center;
+    line-height: 2;
+    overflow: hidden;
+    border: 1px solid #ededed;
+    color: #2D4B5E;
+    font-weight: bold;
+}
+
+.product-list .item img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+}
+
+.text-prod-list{
+    font-weight: normal;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -ms-line-clamp: 3;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    display: -webkit-box;
+    display: box;
+    word-wrap: break-word;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    line-height: 19px;
+    color: #010105;
+}

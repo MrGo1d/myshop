@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<body>
+  <p>
+    Счет №{{ order.id }}</br>
+    <span class="secondary">
+      {{ order.created|date:"M d, Y" }}
+    </span>
+  </p>
+  <h3 style="margin-bottom: -15px;">Поставщик:</h3>
+  <h4 style="margin-bottom: -15px;">"Horns and hooves" LLC</h4>
+  <p style="{line-height: 1.0em;}">
+    Юридический адрес: 200000, г. Минск, пр-т Машерова, 1<br>
+    Р/с: №BY00XXXX000000000000000000000001 в ЗАО «Альфа-Банк»<br>
+    УНП: 777777777<br>
+    тел. факс: +375 (17) 200-00-00
+  </p>
+  <h3 style="margin-bottom: -15px;">Покупатель:</h3>
+  <h4 style="margin-bottom: -15px;">{{ order.last_name }}</h4>
+  <p>
+    Юридический адрес: {{ order.postal_code }}<br>
+    Р/с: {{ order.address }}<br>
+    УНП: {{ order.first_name }}<br>
+    Контакт: {{ order.email }}
+  </p>
+  <h4 style="margin-bottom: -15px;">Спецификация:</h4>
+  <table>
+    <thead>
+    <tr>
+      <th>Артикул</th>
+      <th>Наименование</th>
+      <th>Цена за ед., BYN</th>
+      <th>Количество</th>
+      <th>Стоимость с НДС, BYN</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for item in order.items.all %}
+        <tr class="row{% cycle "1" "2" %}">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.product.product_name }}</td>
+          <td class="num">{{ item.price }}</td>
+          <td class="num">{{ item.quantity }}</td>
+          <td class="num">{{ item.get_cost }}</td>
+        </tr>
+      {% endfor %}
+      <tr class="total">
+        <td colspan="4">Итого:</td>
+        <td class="num">{{ order.get_total_cost }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
+  {% if order.paid %}Оплачен{% else %}Ожидает оплаты{% endif %}
+  </span>
+  </br>
+  </br>
+  </br>
+  </br>
+  <span class="stamp" style="margin-bottom: -100px;">Печать организации</span>
+  <pre >Директор                                            О.Бендер</pre>
+
+</body>
+</html>

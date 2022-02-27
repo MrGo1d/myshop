@@ -1,0 +1,8 @@
+.text-about {
+    color: #020312;
+    text-align: left;
+    font-weight: 500;
+    font-size:110%;
+    column-count: 1;
+    column-width: 250px;
+}
